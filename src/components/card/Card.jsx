@@ -17,7 +17,6 @@ const Card = ({movies}) => {
           <h3 className="small-movie-card__title">
             <a className="small-movie-card__link" href="movie-page.html">
               {movie.title}
-              {console.log(titleToSrc(movie.title))}
             </a>
           </h3>
         </article>
