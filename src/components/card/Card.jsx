@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {titleToSrc} from "../../utils/utils.js";
 
 const Card = ({movies}) => {
@@ -15,9 +16,9 @@ const Card = ({movies}) => {
             />
           </div>
           <h3 className="small-movie-card__title">
-            <a className="small-movie-card__link" href="movie-page.html">
+            <Link className="small-movie-card__link" to={`/films/${movie.id}`}>
               {movie.title}
-            </a>
+            </Link>
           </h3>
         </article>
       ))}
