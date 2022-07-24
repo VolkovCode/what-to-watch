@@ -3,8 +3,10 @@ import Footer from "../footer/Footer";
 import Logo from "../logo/Logo";
 import MoviePageDetails from "./MoviePageDetails";
 import MoviePageReviews from "./MoviePageReviews";
+import {Link, useParams} from "react-router-dom";
 
 const MoviePage = () => {
+  const {id} = useParams();
   return (
     <div>
       <section className="movie-card movie-card--full">
@@ -54,9 +56,9 @@ const MoviePage = () => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">
+                <Link to={`/films/${id}/review`} className="btn movie-card__button">
                   Add review
-                </a>
+                </Link>
               </div>
             </div>
           </div>
