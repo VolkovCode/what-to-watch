@@ -1,12 +1,26 @@
-import React from "react";
+import React, { memo, useMemo, useState } from "react";
 import Footer from "../footer/Footer";
 import Logo from "../logo/Logo";
 import MoviePageDetails from "./MoviePageDetails";
 import MoviePageReviews from "./MoviePageReviews";
-import {Link, useParams} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import MoviePageOverview from "./MoviePageOverview";
 
 const MoviePage = () => {
-  const {id} = useParams();
+  const { id } = useParams();
+  const [activeLink, setActiveLink] = useState(`Overview`);
+  const getPageElement = memo((activeLink) => {
+    switch (activeLink) {
+      case `Overview`:
+        return <MoviePageOverview />;
+      case `Details`:
+        return <MoviePageDetails />;
+      case `Reviews`:
+        return <MoviePageReviews />;
+      default:
+        return <MoviePageOverview />;
+    }
+  });
   return (
     <div>
       <section className="movie-card movie-card--full">
@@ -21,7 +35,7 @@ const MoviePage = () => {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header movie-card__head">
-            <Logo />
+            {<Logo />}
 
             <div className="user-block">
               <div className="user-block__avatar">
@@ -64,7 +78,42 @@ const MoviePage = () => {
           </div>
         </div>
 
-        <MoviePageReviews />
+        <div className="movie-card__wrap movie-card__translate-top">
+          <div className="movie-card__info">
+            <div className="movie-card__poster movie-card__poster--big">
+              <img
+                src="img/the-grand-budapest-hotel-poster.jpg"
+                alt="The Grand Budapest Hotel poster"
+                width="218"
+                height="327"
+              />
+            </div>
+
+            <div className="movie-card__desc">
+              <nav className="movie-nav movie-card__nav">
+                <ul className="movie-nav__list">
+                  <li className={`movie-nav__item ` + (activeLink === `Overview` ? `movie-nav__item--active` : ``)}>
+                    <a onClick={() => setActiveLink(`Overview`)} className="movie-nav__link">
+                      Overview
+                    </a>
+                  </li>
+                  <li className={`movie-nav__item ` + (activeLink === `Details` ? `movie-nav__item--active` : ``)}>
+                    <a onClick={() => setActiveLink(`Details`)} className="movie-nav__link">
+                      Details
+                    </a>
+                  </li>
+                  <li className={`movie-nav__item ` + (activeLink === `Reviews` ? `movie-nav__item--active` : ``)}>
+                    <a onClick={() => setActiveLink(`Reviews`)} className="movie-nav__link">
+                      Reviews
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
+              {getPageElement(activeLink)}
+            </div>
+          </div>
+        </div>
       </section>
 
       <div className="page-content">

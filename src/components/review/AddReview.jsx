@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import Logo from '../logo/Logo';
-import {useParams, Link} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom';
 
 const AddReview = () => {
-  const {id} = useParams()
+  const {id} = useParams();
 
   const [reviewForm, setReviewForm] = useState({
     'rating': `8`,
@@ -19,7 +19,6 @@ const AddReview = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('форма отправлена', reviewForm);
   };
 
   return (
