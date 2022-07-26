@@ -1,15 +1,16 @@
-import React, { memo, useMemo, useState } from "react";
+import React, {useMemo, useState} from "react";
 import Footer from "../footer/Footer";
 import Logo from "../logo/Logo";
 import MoviePageDetails from "./MoviePageDetails";
 import MoviePageReviews from "./MoviePageReviews";
-import { Link, useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import MoviePageOverview from "./MoviePageOverview";
 
 const MoviePage = () => {
-  const { id } = useParams();
+  const LogoComponent = useMemo(() => <Logo />)
+  const {id} = useParams();
   const [activeLink, setActiveLink] = useState(`Overview`);
-  const getPageElement = memo((activeLink) => {
+  const getPageElement = (activeLink) => {
     switch (activeLink) {
       case `Overview`:
         return <MoviePageOverview />;
@@ -20,7 +21,7 @@ const MoviePage = () => {
       default:
         return <MoviePageOverview />;
     }
-  });
+  };
   return (
     <div>
       <section className="movie-card movie-card--full">
@@ -35,7 +36,7 @@ const MoviePage = () => {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header movie-card__head">
-            {<Logo />}
+            {LogoComponent}
 
             <div className="user-block">
               <div className="user-block__avatar">

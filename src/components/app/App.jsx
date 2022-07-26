@@ -6,7 +6,7 @@ import Login from "../login/Login";
 import MyList from "../mylist/MyList";
 import MoviePage from "../movie-page/MoviePage";
 import MoviePageDetails from "../movie-page/MoviePageDetails";
-import Player from "../player/Player";
+import Player from "../video-player/Player";
 import AddReview from "../review/AddReview";
 
 const App = () => {
