@@ -1,21 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
+import { titleToSrc } from '../../utils/utils.js';
+import VideoPlayer from '../video-player/Player.jsx';
 
-const CardPoster = () => {
+const CardPoster = ({ movie }) => {
+  const [playPreview, setPlayPreview] = useState(false);
+  const handlePlayPreview = () => {
+    setTimeout(() => setPlayPreview(true), 1000);
+  };
+  const handleDisplayPoster = () => {
+    setPlayPreview(false);
+  };
   return (
-    <div><div className="small-movie-card__image">
-      <img
-        src={titleToSrc(movie.title)}
-        alt={movie.title}
-        width="280"
-        height="175"
-      />
-    </div>
-    <h3 className="small-movie-card__title">
-      <Link className="small-movie-card__link" to={`/films/${movie.id}`}>
-        {movie.title}
-      </Link>
-    </h3></div>
-  )
-}
+    <article onMouseOut={() => setPlayPreview(false)} onMouseEnter={handlePlayPreview} onMouseLeave={handleDisplayPoster} className="small-movie-card catalog__movies-card">
+      {playPreview
+        ? <VideoPlayer src={movie.preview_video_link} isPlayingProp={playPreview} />
+        : (<><div className="small-movie-card__image">
+          <img src={movie.preview_image} alt={movie.name} width="280" height="175" />
+        </div>
+        <h3 className="small-movie-card__title">
+          <Link className="small-movie-card__link" to={`/films/${movie.id}`}>{movie.name}</Link>
+        </h3></>)}
+
+    </article>
+  );
+};
 
 export default CardPoster;
