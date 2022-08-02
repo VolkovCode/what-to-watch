@@ -5,11 +5,13 @@ import VideoPlayer from '../video-player/Player.jsx';
 
 const CardPoster = ({ movie }) => {
   const [playPreview, setPlayPreview] = useState(false);
+  let playWithDelay;
   const handlePlayPreview = () => {
-    setTimeout(() => setPlayPreview(true), 1000);
+    playWithDelay = setTimeout(() => setPlayPreview(true), 1000);
   };
   const handleDisplayPoster = () => {
     setPlayPreview(false);
+    clearTimeout(playWithDelay)
   };
   return (
     <article onMouseOut={() => setPlayPreview(false)} onMouseEnter={handlePlayPreview} onMouseLeave={handleDisplayPoster} className="small-movie-card catalog__movies-card">
