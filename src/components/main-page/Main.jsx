@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import Card from "../card/card";
 import Footer from "../footer/Footer";
-import Genre from "../genre/Genre";
+import GenresList from "../genre/GenresList";
 import Logo from "../logo/Logo";
 
 const Main = ({genres, movies}) => {
@@ -72,7 +72,7 @@ const Main = ({genres, movies}) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          {<Genre genres={genres}/>}
+          {<GenresList />}
           {<Card movies={movies}/>}
 
           <div className="catalog__more">
