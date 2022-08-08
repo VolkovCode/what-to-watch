@@ -5,7 +5,7 @@ import Footer from "../footer/Footer";
 import GenresList from "../genre/GenresList";
 import Logo from "../logo/Logo";
 
-const Main = ({genres, movies}) => {
+const Main = () => {
   return (
     <div>
       <section className="movie-card">
@@ -73,7 +73,7 @@ const Main = ({genres, movies}) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           {<GenresList />}
-          {<Card movies={movies}/>}
+          {<Card/>}
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">

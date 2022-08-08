@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
-import { titleToSrc } from '../../utils/utils.js';
+import {Link} from 'react-router-dom';
 import VideoPlayer from '../video-player/Player.jsx';
 
 const CardPoster = ({ movie }) => {

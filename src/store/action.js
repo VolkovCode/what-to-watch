@@ -8,6 +8,10 @@ export const ActionType = {
 export const ActionCreator = {
   resetFilters: () => ({
     type: ActionType.RESET_FILTERS,
-  })
+  }),
+  filterMovies: (genre) => ({
+    type: ActionType.FILTER_MOVIE,
+    payload: genre,
+  }),
 };
 

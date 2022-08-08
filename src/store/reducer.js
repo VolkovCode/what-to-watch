@@ -4,7 +4,7 @@ import {ActionType} from "./action";
 
 const initialState = {
   movies: mvs,
-
+  genres: new Set(mvs.map(((mv) => mv.genre)))
 };
 
 const reducer = (state = initialState, action) => {
