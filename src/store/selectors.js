@@ -7,6 +7,6 @@ export const getGenres = (state) => {
 };
 
 export const getMovies = (state) => {
-  const movies = state.movies;
+  const movies = state.movies.slice(0, state.visibleCards);
   return movies;
 };

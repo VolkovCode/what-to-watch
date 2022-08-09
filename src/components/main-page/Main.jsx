@@ -4,6 +4,7 @@ import Card from "../card/card";
 import Footer from "../footer/Footer";
 import GenresList from "../genre/GenresList";
 import Logo from "../logo/Logo";
+import ShowMore from "./show-more";
 
 const Main = () => {
   return (
@@ -72,14 +73,10 @@ const Main = () => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          {<GenresList />}
-          {<Card/>}
+          <GenresList />
+          <Card/>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">
-              Show more
-            </button>
-          </div>
+          <ShowMore />
         </section>
 
         <Footer />
