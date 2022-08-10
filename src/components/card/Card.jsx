@@ -1,13 +1,14 @@
 import React, {useState} from "react";
-import { connect } from "react-redux";
-import { getMovies } from "../../store/selectors.js";
+import {connect} from "react-redux";
+import {getMovies, getVisibleCardsCount} from "../../store/selectors.js";
 import CardPoster from "./CardPoster.jsx";
 
-const Card = ({movies}) => {
+const Card = ({movies, visibleCardsCount}) => {
+  const shownMovies = movies.slice(0, visibleCardsCount);
   return (
     <div >
       <div className="catalog__movies-list">
-        {movies.map((movie) => (
+        {shownMovies.map((movie) => (
           <CardPoster key={movie.id} movie={movie} />
         ))}
       </div>
@@ -17,7 +18,8 @@ const Card = ({movies}) => {
 };
 
 const mapStateToProps = (state) => ({
-  movies: getMovies(state)
+  movies: getMovies(state),
+  visibleCardsCount: getVisibleCardsCount(state)
 });
 
 

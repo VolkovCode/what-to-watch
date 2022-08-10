@@ -164,7 +164,7 @@ export const movies = [
     "is_favorite": false
   },
   {
-    id: 1,
+    id: 9,
     name: `The Grand Budapest Hotel`,
     poster_image: `img/the-grand-budapest-hotel-poster.jpg`,
     preview_image: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -183,7 +183,7 @@ export const movies = [
     is_favorite: false
   },
   {
-    "id": 2,
+    "id": 10,
     "name": `The Grand Budapest Hotel`,
     "poster_image": `img/the-grand-budapest-hotel-poster.jpg`,
     "preview_image": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -202,7 +202,7 @@ export const movies = [
     "is_favorite": false
   },
   {
-    "id": 3,
+    "id": 11,
     "name": `The Grand Budapest Hotel`,
     "poster_image": `img/the-grand-budapest-hotel-poster.jpg`,
     "preview_image": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -221,7 +221,7 @@ export const movies = [
     "is_favorite": false
   },
   {
-    "id": 4,
+    "id": 12,
     "name": `The Grand Budapest Hotel`,
     "poster_image": `img/the-grand-budapest-hotel-poster.jpg`,
     "preview_image": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -240,7 +240,7 @@ export const movies = [
     "is_favorite": false
   },
   {
-    "id": 5,
+    "id": 13,
     "name": `The Grand Budapest Hotel`,
     "poster_image": `img/the-grand-budapest-hotel-poster.jpg`,
     "preview_image": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -259,7 +259,7 @@ export const movies = [
     "is_favorite": false
   },
   {
-    "id": 6,
+    "id": 14,
     "name": `The Grand Budapest Hotel`,
     "poster_image": `img/the-grand-budapest-hotel-poster.jpg`,
     "preview_image": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -278,7 +278,7 @@ export const movies = [
     "is_favorite": false
   },
   {
-    "id": 7,
+    "id": 15,
     "name": `The Grand Budapest Hotel`,
     "poster_image": `img/the-grand-budapest-hotel-poster.jpg`,
     "preview_image": `img/bg-the-grand-budapest-hotel.jpg`,
@@ -297,7 +297,26 @@ export const movies = [
     "is_favorite": false
   },
   {
-    "id": 8,
+    "id": 16,
+    "name": `The Grand Budapest Hotel`,
+    "poster_image": `img/the-grand-budapest-hotel-poster.jpg`,
+    "preview_image": `img/bg-the-grand-budapest-hotel.jpg`,
+    "background_image": `img/the-grand-budapest-hotel-bg.jpg`,
+    "background_color": `#ffffff`,
+    "video_link": `https://some-link`,
+    "preview_video_link": `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    "description": `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+    "rating": 8.9,
+    "scores_count": 240,
+    "director": `Wes Andreson`,
+    "starring": [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+    "run_time": 99,
+    "genre": `Comedy`,
+    "released": 2014,
+    "is_favorite": false
+  },
+  {
+    "id": 17,
     "name": `The Grand Budapest Hotel`,
     "poster_image": `img/the-grand-budapest-hotel-poster.jpg`,
     "preview_image": `img/bg-the-grand-budapest-hotel.jpg`,

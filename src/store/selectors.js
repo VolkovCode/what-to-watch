@@ -7,6 +7,11 @@ export const getGenres = (state) => {
 };
 
 export const getMovies = (state) => {
-  const movies = state.movies.slice(0, state.visibleCards);
+  const movies = state.movies;
   return movies;
 };
+
+export const getVisibleCardsCount = (state) => {
+  const count = state.visibleCards;
+  return count;
+}
