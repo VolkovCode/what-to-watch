@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import {legacy_createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
-
+import thunk from 'redux-thunk';
+import {applyMiddleware} from 'redux';
 import App from './components/app/App';
 import {reducer} from './store/reducer';
+import {createAPI} from './api/api';
 
 const store = legacy_createStore(
     reducer,

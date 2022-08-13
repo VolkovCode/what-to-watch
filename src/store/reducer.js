@@ -23,8 +23,7 @@ const reducer = (state = initialState, action) => {
       };
     case ActionType.RESET_FILTERS:
       return {
-        ...initialState,
-        visibleCards: state.visibleCards
+        ...initialState
       };
     case ActionType.SHOW_MORE:
       return {
