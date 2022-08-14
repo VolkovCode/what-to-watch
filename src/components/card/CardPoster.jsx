@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import VideoPlayer from '../video-player/Player.jsx';
 
-const CardPoster = ({ movie }) => {
+const CardPoster = ({movie}) => {
   const [playPreview, setPlayPreview] = useState(false);
   let playWithDelay;
   const handlePlayPreview = () => {
@@ -10,7 +10,7 @@ const CardPoster = ({ movie }) => {
   };
   const handleDisplayPoster = () => {
     setPlayPreview(false);
-    clearTimeout(playWithDelay)
+    clearTimeout(playWithDelay);
   };
   return (
     <article onMouseOut={() => setPlayPreview(false)} onMouseEnter={handlePlayPreview} onMouseLeave={handleDisplayPoster} className="small-movie-card catalog__movies-card">
@@ -22,7 +22,6 @@ const CardPoster = ({ movie }) => {
         <h3 className="small-movie-card__title">
           <Link className="small-movie-card__link" to={`/films/${movie.id}`}>{movie.name}</Link>
         </h3></>)}
-
     </article>
   );
 };

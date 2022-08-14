@@ -3,7 +3,9 @@ export const ActionType = {
   FILTER_MOVIE: `movie/filterMovie`,
   RESET_FILTERS: `movie/resetFilters`,
   GET_GENRES: `genre/getGenres`,
-  SHOW_MORE: `movies/showMore`
+  SHOW_MORE: `movies/showMore`,
+  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
+  LOAD_MOVIES: `data/loadMovies`,
 };
 
 export const ActionCreator = {
@@ -17,6 +19,13 @@ export const ActionCreator = {
   showMore: () => ({
     type: ActionType.SHOW_MORE,
     payload: 8
+  }),
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
+  }),
+  loadMovies: (movies) => ({
+    type: ActionType.LOAD_MOVIES,
+    payload: movies
   })
 };
-

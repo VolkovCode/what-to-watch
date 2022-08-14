@@ -1,12 +1,12 @@
-import {INITIAL_CARDS} from "../data/constants";
-import {movies as mvs} from "../data/mock-data";
+import {ALL_GENRES, AuthorizationStatus, INITIAL_CARDS} from "../data/constants";
 import {ActionType} from "./action";
 
-
 const initialState = {
-  movies: mvs,
-  genres: new Set(mvs.map(((mv) => mv.genre))),
+  movies: [],
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
   visibleCards: INITIAL_CARDS,
+  activeGenre: ALL_GENRES,
+  isDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,19 +16,33 @@ const reducer = (state = initialState, action) => {
         ...state,
         genres: action.payload
       };
-    case ActionType.FILTER_MOVIE:
-      return {
-        ...state,
-        movies: state.movies.filter((movie) => movie.genre === action.payload)
-      };
     case ActionType.RESET_FILTERS:
       return {
-        ...initialState
+        ...state,
+        activeGenre: ALL_GENRES,
+        visibleCards: INITIAL_CARDS,
       };
     case ActionType.SHOW_MORE:
       return {
         ...state,
         visibleCards: state.visibleCards + action.payload,
+      };
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload,
+      };
+    case ActionType.LOAD_MOVIES:
+      return {
+        ...state,
+        movies: action.payload,
+        isDataLoaded: true
+      };
+    case ActionType.FILTER_MOVIE:
+      return {
+        ...state,
+        activeGenre: action.payload,
+        visibleCards: INITIAL_CARDS,
       };
   }
   return state;

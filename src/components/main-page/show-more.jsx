@@ -27,6 +27,6 @@ const mapStateToProps = (state) => ({
   visibleCardsCount: getVisibleCardsCount(state)
 });
 
-export { ShowMore };
+export {ShowMore};
 export default connect(mapStateToProps, mapDispatchToProps)(ShowMore);
 
