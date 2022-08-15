@@ -7,10 +7,11 @@ import MyList from "../mylist/MyList";
 import MoviePage from "../movie-page/MoviePage";
 import Player from "../video-player/Player";
 import AddReview from "../review/AddReview";
+import browserHistory from "../../browser-history";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Routes>
         <Route path='/' element={<Main genres={genres} movies={movies}/>} ></Route>
         <Route exact path='/login' element={<Login />} ></Route>

@@ -1,4 +1,4 @@
-import { ALL_GENRES } from "../data/constants";
+import {ALL_GENRES} from "../data/constants";
 
 
 export const getGenres = (state) => {
@@ -11,7 +11,7 @@ export const getMovies = (state) => {
   if (state.activeGenre === ALL_GENRES) {
     return movies;
   }
-  return movies.filter((movie) => movie.genre === state.activeGenre)
+  return movies.filter((movie) => movie.genre === state.activeGenre);
 };
 
 export const getVisibleCardsCount = (state) => {
