@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { login } from "../../store/api-actions";
 // import {Link} from "react-router-dom";
 import Footer from "../footer/Footer";
 import Logo from "../logo/Logo";
 
-const Login = () => {
+const Login = ({userLogin}) => {
+
+  const [email, setLogin] = useState(``);
+  const [password, setPassword] = useState(``);
+
+  const onClickHandlerLogin = (e) => {
+    e.preventDefault();
+    // userLogin({login: email, password});
+  };
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -22,6 +33,8 @@ const Login = () => {
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                value={email}
+                onChange={(e) => setLogin(e.target.value)}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">
                 Email address
@@ -34,6 +47,8 @@ const Login = () => {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">
                 Password
@@ -41,7 +56,7 @@ const Login = () => {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit">
+            <button onClick={(e) => onClickHandlerLogin(e)} className="sign-in__btn" type="submit">
               Sign in
             </button>
           </div>
@@ -52,4 +67,11 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  userLogin({login: email, password}) {
+    dispatch(login({login: email, password}));
+  }
+});
+
+export {Login};
+export default connect(null, mapDispatchToProps)(Login);
