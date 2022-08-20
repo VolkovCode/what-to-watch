@@ -11,7 +11,7 @@ import {createAPI} from './api/api';
 import {ActionCreator} from './store/action';
 import {AuthorizationStatus} from './data/constants';
 import {checkAuth} from './store/api-actions';
-// import { BrowserRouter } from 'react-router-dom';
+
 
 const api = createAPI(
     () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))

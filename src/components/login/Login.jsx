@@ -1,18 +1,24 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { login } from "../../store/api-actions";
+import React, {useState} from "react";
+import {connect} from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import {login} from "../../store/api-actions";
 // import {Link} from "react-router-dom";
 import Footer from "../footer/Footer";
 import Logo from "../logo/Logo";
 
 const Login = ({userLogin}) => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  const fromPage = location.state ? location.state.from.pathname : `/`;
+  console.log(fromPage)
   const [email, setLogin] = useState(``);
   const [password, setPassword] = useState(``);
 
   const onClickHandlerLogin = (e) => {
     e.preventDefault();
-    // userLogin({login: email, password});
+    userLogin({login: email, password});
+    navigate(fromPage);
   };
 
   return (

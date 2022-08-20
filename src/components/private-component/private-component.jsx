@@ -1,15 +1,17 @@
 import React from 'react';
-import {Route, Navigate } from 'react-router-dom';
+import {Navigate, useLocation} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {AuthorizationStatus} from '../../data/constants';
 
 
-const PrivateComponent = ({component, redirectTo, authorizationStatus}) => {
-  return (
-    authorizationStatus !== AuthorizationStatus.NO_AUTH
-      ? component
-      : <Navigate to={redirectTo} replace={true}/>
-  );
+const PrivateComponent = ({children, redirectTo, authorizationStatus}) => {
+  const location = useLocation();
+
+  if (authorizationStatus !== AuthorizationStatus.AUTH) {
+    return <Navigate to={redirectTo} state={{from: location}} />;
+  }
+
+  return children;
 };
 
 const mapStateToProps = (state) => ({
