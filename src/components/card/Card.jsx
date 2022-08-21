@@ -6,7 +6,6 @@ import CardPoster from "./CardPoster.jsx";
 
 const Card = ({movies, visibleCardsCount, isDataLoaded, onLoadData}) => {
   const shownMovies = movies.slice(0, visibleCardsCount);
-
   useEffect(() => {
     if (!isDataLoaded) {
       onLoadData();

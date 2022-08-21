@@ -1,17 +1,26 @@
 import React, {useState} from 'react';
+import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
+import { fetchMovie } from '../../store/api-actions.js';
 import VideoPlayer from '../video-player/Player.jsx';
 
-const CardPoster = ({movie}) => {
+const CardPoster = ({movie, onLoadMovie}) => {
   const [playPreview, setPlayPreview] = useState(false);
   let playWithDelay;
+
   const handlePlayPreview = () => {
     playWithDelay = setTimeout(() => setPlayPreview(true), 1000);
   };
+
   const handleDisplayPoster = () => {
     setPlayPreview(false);
     clearTimeout(playWithDelay);
   };
+
+  // const onClickHandler = (id) => {
+  //   onLoadMovie(id);
+  // };
+
   return (
     <article onMouseOut={() => setPlayPreview(false)} onMouseEnter={handlePlayPreview} onMouseLeave={handleDisplayPoster} className="small-movie-card catalog__movies-card">
       {playPreview
@@ -26,4 +35,10 @@ const CardPoster = ({movie}) => {
   );
 };
 
-export default CardPoster;
+const mapDispatchToProps = (dispatch) => ({
+  onLoadMovie(id) {
+    dispatch(fetchMovie(id));
+  }
+});
+
+export default connect(null, mapDispatchToProps)(CardPoster);

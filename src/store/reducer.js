@@ -6,6 +6,8 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   visibleCards: INITIAL_CARDS,
   activeGenre: ALL_GENRES,
+  activeFilm: {},
+  promoFilm: {},
   isDataLoaded: false,
 };
 
@@ -43,6 +45,21 @@ const reducer = (state = initialState, action) => {
         ...state,
         activeGenre: action.payload,
         visibleCards: INITIAL_CARDS,
+      };
+    case ActionType.LOAD_MOVIE_BY_ID:
+      return {
+        ...state,
+        activeFilm: action.payload,
+      };
+    case ActionType.LOAD_PROMO_MOVIE:
+      return {
+        ...state,
+        promoFilm: action.payload
+      };
+    case ActionType.LOAD_PROMO_MOVIE:
+      return {
+        ...state,
+        promoFilm: action.payload
       };
   }
   return state;

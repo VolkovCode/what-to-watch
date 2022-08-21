@@ -6,6 +6,9 @@ export const ActionType = {
   SHOW_MORE: `movies/showMore`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   LOAD_MOVIES: `data/loadMovies`,
+  LOAD_MOVIE_BY_ID: `data/loadMovieByID`,
+  LOAD_PROMO_MOVIE: `data/loadPromoMovie`,
+  MAKE_FAVOURITE: `data/makeFavourite`,
 };
 
 export const ActionCreator = {
@@ -27,5 +30,15 @@ export const ActionCreator = {
   loadMovies: (movies) => ({
     type: ActionType.LOAD_MOVIES,
     payload: movies
-  })
+  }),
+  loadFilmById: (movie) => ({
+    type: ActionType.LOAD_MOVIE_BY_ID,
+    payload: movie
+  }),
+  loadPromoFilm: (movie) => ({
+    type: ActionType.LOAD_PROMO_MOVIE,
+    payload: movie
+  }),
+  makeFavourite: ()
+
 };

@@ -16,3 +16,18 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
   api.post(`/login`, {email, password})
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
 );
+
+export const fetchMovie = (id) => (dispatch, _getState, api) => (
+  api.get(`/films/${id}`)
+    .then(({data}) => dispatch(ActionCreator.loadFilmById(data)))
+);
+
+export const fetchPromoMovie = () => (dispatch, _getState, api) => (
+  api.get(`/films/promo`)
+    .then(({data}) => dispatch(ActionCreator.loadPromoFilm(data)))
+);
+
+export const makeFavourite = (id, status) => (dispatch, _getState, api) => (
+  api.get(`/favorite/${id}/${status}`)
+    .then(({data}) => dispatch)
+);

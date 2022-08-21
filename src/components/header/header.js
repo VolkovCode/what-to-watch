@@ -1,26 +1,24 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import { AuthorizationStatus } from '../../data/constants';
+import Logo from '../logo/Logo';
+import AvatarBlock from './user-block/avater-block';
+import SigninBlock from './user-block/signin-block';
 
-const Header = () => {
+const Header = ({authorizationStatus}) => {
+  const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
+  const userBlock = isAuthorized ? <AvatarBlock /> : <SigninBlock />;
   return (
     <header className="page-header">
-      <div className="logo">
-        <a className="logo__link">
-          <span className="logo__letter logo__letter--1">W</span>
-          <span className="logo__letter logo__letter--2">T</span>
-          <span className="logo__letter logo__letter--3">W</span>
-        </a>
-      </div>
-
-      <div className="user-block">
-        <a href="sign-in.html" className="user-block__link">Sign in</a>
-      </div>
-      <div className="user-block">
-        <div className="user-block__avatar">
-          <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-        </div>
-      </div>
+      <Logo />
+      {userBlock}
     </header>
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+});
+
+export {Header};
+export default connect(mapStateToProps)(Header);
