@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import {connect} from "react-redux";
+import {Link, useParams} from "react-router-dom";
+import { getReviws } from "../../store/api-actions";
 
-const MoviePageReviews = () => {
+const MoviePageReviews = ({reviews, onLoadReviews}) => {
+  console.log(reviews);
+  const {id} = useParams();
+  useEffect(() => {
+    onLoadReviews(id);
+    console.log(reviews);
+  }, []);
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
@@ -124,4 +133,15 @@ const MoviePageReviews = () => {
   );
 };
 
-export default MoviePageReviews;
+const mapStateToProps = (state) => ({
+  reviews: state.comments
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadReviews(id) {
+    dispatch(getReviws(id));
+  }
+});
+
+export {MoviePageReviews};
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePageReviews);

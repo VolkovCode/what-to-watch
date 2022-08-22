@@ -9,6 +9,7 @@ const initialState = {
   activeFilm: {},
   promoFilm: {},
   isDataLoaded: false,
+  comments: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -56,10 +57,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         promoFilm: action.payload
       };
-    case ActionType.LOAD_PROMO_MOVIE:
+    case ActionType.LOAD_COMMENTS:
       return {
         ...state,
-        promoFilm: action.payload
+        comments: action.payload
       };
   }
   return state;

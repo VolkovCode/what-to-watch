@@ -1,6 +1,5 @@
 import React, {useEffect, useMemo, useState} from "react";
 import Footer from "../footer/Footer";
-import Logo from "../logo/Logo";
 import MoviePageDetails from "./MoviePageDetails";
 import MoviePageReviews from "./MoviePageReviews";
 import {Link, useParams} from "react-router-dom";

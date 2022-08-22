@@ -1,24 +1,35 @@
 import React, {useState} from 'react';
 import Logo from '../logo/Logo';
 import {useParams, Link} from 'react-router-dom';
+import { addReview } from '../../store/api-actions';
+import { connect } from "react-redux";
 
-const AddReview = () => {
+const AddReview = ({postReview}) => {
   const {id} = useParams();
 
   const [reviewForm, setReviewForm] = useState({
-    'rating': `8`,
-    'review-text': ``,
+    rating: `8`,
+    comment: ``,
   });
 
-  const handleFieldChange = (e) => {
-    const {name, value} = e.target;
+  const handleReviewRatingChange = (e) => {
+    // const {name, value} = e.target;
     setReviewForm(
-        {...reviewForm, [name]: value}
+        {...reviewForm, rating: e.target.value}
+    );
+  };
+
+  const handleReviewTextChange = (e) => {
+    // const {name, value} = e.target;
+    setReviewForm(
+        {...reviewForm, comment: e.target.value}
     );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    postReview(id, reviewForm);
+
   };
 
   return (
@@ -56,7 +67,7 @@ const AddReview = () => {
       </div><div className="add-review">
         <form onSubmit={handleSubmit} action="#" className="add-review__form">
           <div className="rating">
-            <div onChange={handleFieldChange} className="rating__stars">
+            <div onChange={handleReviewRatingChange} className="rating__stars">
               <input className="rating__input" id="star-1" type="radio" name="rating" value="1" />
               <label className="rating__label" htmlFor="star-1">Rating 1</label>
 
@@ -90,7 +101,7 @@ const AddReview = () => {
           </div>
 
           <div className="add-review__text">
-            <textarea onChange={handleFieldChange} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <textarea onChange={handleReviewTextChange} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit">Post</button>
             </div>
@@ -103,4 +114,11 @@ const AddReview = () => {
   );
 };
 
-export default AddReview;
+const mapDispatchToProps = (dispatch) => ({
+  postReview(id, {rating, comment}) {
+    dispatch(addReview(id, {rating, comment}));
+  }
+});
+
+export {AddReview};
+export default connect(null, mapDispatchToProps)(AddReview);

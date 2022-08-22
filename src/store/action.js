@@ -9,6 +9,8 @@ export const ActionType = {
   LOAD_MOVIE_BY_ID: `data/loadMovieByID`,
   LOAD_PROMO_MOVIE: `data/loadPromoMovie`,
   MAKE_FAVOURITE: `data/makeFavourite`,
+  LOAD_COMMENTS: `data/loadComments`,
+  POST_COMMENT: `data/postComment`,
 };
 
 export const ActionCreator = {
@@ -39,6 +41,13 @@ export const ActionCreator = {
     type: ActionType.LOAD_PROMO_MOVIE,
     payload: movie
   }),
-  makeFavourite: ()
-
+  // makeFavourite: ()
+  loadComments: (comments) => ({
+    type: ActionType.LOAD_COMMENTS,
+    payload: comments
+  }),
+  postComment: (comment) => ({
+    type: ActionType.POST_COMMENT,
+    payload: comment
+  })
 };
