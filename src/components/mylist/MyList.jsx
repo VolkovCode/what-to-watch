@@ -3,9 +3,9 @@ import {useNavigate} from "react-router-dom";
 import Card from "../card/card";
 import Footer from "../footer/Footer";
 import Logo from "../logo/Logo";
+import MyListCatalog from "./mylist-catalog";
 
 const MyList = () => {
-  const movies = {};
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -27,8 +27,7 @@ const MyList = () => {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Каталог</h2>
-
-        {<Card movies={movies}/>}
+        <MyListCatalog />
       </section>
 
       <Footer />

@@ -10,14 +10,15 @@ import { AuthorizationStatus } from "../../data/constants";
 import { fetchMovie } from "../../store/api-actions";
 import MyListButton from "./mylist-button";
 
-const MoviePage = ({authorizationStatus, film, onLoadMovie}) => {
+const MoviePage = ({authorizationStatus, film, isDataLoaded, onLoadMovie}) => {
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
 
   const {id} = useParams();
   const [activeLink, setActiveLink] = useState(`Overview`);
   useEffect(() => {
-    onLoadMovie(id);
-  }, []);
+    if (!isDataLoaded) {
+      onLoadMovie(id);}
+  }, [isDataLoaded]);
   const getPageElement = (activeLink) => {
     switch (activeLink) {
       case `Overview`:
@@ -185,6 +186,7 @@ const MoviePage = ({authorizationStatus, film, onLoadMovie}) => {
 const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
   film: state.activeFilm,
+  isDataLoaded: state.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

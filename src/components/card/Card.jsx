@@ -27,7 +27,7 @@ const Card = ({movies, visibleCardsCount, isDataLoaded, onLoadData}) => {
 const mapStateToProps = (state) => ({
   movies: getMovies(state),
   visibleCardsCount: getVisibleCardsCount(state),
-  onLoadData: state.isDataLoaded,
+  isDataLoaded: state.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

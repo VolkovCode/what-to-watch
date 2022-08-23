@@ -3,6 +3,7 @@ import {ActionType} from "./action";
 
 const initialState = {
   movies: [],
+  favouriteMovies: [],
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   visibleCards: INITIAL_CARDS,
   activeGenre: ALL_GENRES,
@@ -61,6 +62,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         comments: action.payload
+      };
+    case ActionType.LOAD_FAVOURITE_MOVIES:
+      return {
+        ...state,
+        favouriteMovies: action.payload
       };
   }
   return state;

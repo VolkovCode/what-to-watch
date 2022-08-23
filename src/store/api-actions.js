@@ -38,5 +38,10 @@ export const getReviws = (id) => (dispatch, _getState, api) => (
 
 export const addReview = (id, {rating, comment}) => (dispatch, _getState, api) => (
   api.post(`/comments/${id}`, {rating, comment})
-    .then(dispatch(getReviws(id))).then(console.log('окей'))
+    .then(dispatch(getReviws(id)))
+);
+
+export const getFavouriteMovies = () => (dispatch, _getState, api) => (
+  api.get(`/favorite`)
+    .then(({data}) => console.log(data))
 );

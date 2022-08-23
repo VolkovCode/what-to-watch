@@ -11,6 +11,7 @@ export const ActionType = {
   MAKE_FAVOURITE: `data/makeFavourite`,
   LOAD_COMMENTS: `data/loadComments`,
   POST_COMMENT: `data/postComment`,
+  LOAD_FAVOURITE_MOVIES: `data/loadFavouriteMovies`,
 };
 
 export const ActionCreator = {
@@ -49,5 +50,9 @@ export const ActionCreator = {
   postComment: (comment) => ({
     type: ActionType.POST_COMMENT,
     payload: comment
+  }),
+  loadFavouriteFilms: (movies) => ({
+    type: ActionType.LOAD_FAVOURITE_MOVIES,
+    payload: movies,
   })
 };
