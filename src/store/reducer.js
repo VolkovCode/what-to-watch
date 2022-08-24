@@ -1,11 +1,11 @@
-import {ALL_GENRES, AuthorizationStatus, INITIAL_CARDS} from "../data/constants";
+import {ADD_CARDS_COUNT, ALL_GENRES, AuthorizationStatus, INITIAL_CARDS, START_VISIBLE_CARDS_COUNT} from "../data/constants";
 import {ActionType} from "./action";
 
 const initialState = {
   movies: [],
   favouriteMovies: [],
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  visibleCards: INITIAL_CARDS,
+  visibleCards: START_VISIBLE_CARDS_COUNT,
   activeGenre: ALL_GENRES,
   activeFilm: {},
   promoFilm: {},
@@ -24,7 +24,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         activeGenre: ALL_GENRES,
-        visibleCards: INITIAL_CARDS,
+        visibleCards: START_VISIBLE_CARDS_COUNT,
       };
     case ActionType.SHOW_MORE:
       return {
@@ -46,7 +46,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         activeGenre: action.payload,
-        visibleCards: INITIAL_CARDS,
+        visibleCards: ADD_CARDS_COUNT,
       };
     case ActionType.LOAD_MOVIE_BY_ID:
       return {

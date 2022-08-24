@@ -8,7 +8,7 @@ const PrivateComponent = ({children, redirectTo, authorizationStatus}) => {
   const location = useLocation();
 
   if (authorizationStatus !== AuthorizationStatus.AUTH) {
-    return <Navigate to={redirectTo} state={{from: location}} />;
+    return <Navigate to={redirectTo} state={{from: location}} replace={true}/>;
   }
 
   return children;

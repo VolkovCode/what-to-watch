@@ -1,9 +1,9 @@
-import {ALL_GENRES} from "../data/constants";
+import {ALL_GENRES, MAX_GENRES_COUNT} from "../data/constants";
 
 
 export const getGenres = (state) => {
   const genres = new Set(state.movies.map(((movie) => movie.genre)));
-  return [ALL_GENRES, ...genres];
+  return [ALL_GENRES, ...genres].slice(0, MAX_GENRES_COUNT + 1);
 };
 
 export const getMovies = (state) => {

@@ -6,7 +6,6 @@ import Header from '../header/header';
 const PromoCard = ({promoFilm, onLoadPromo}) => {
   useEffect(() => {
     onLoadPromo();
-    console.log(promoFilm)
   }, []);
   return (
     <section className="movie-card">

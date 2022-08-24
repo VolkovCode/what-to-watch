@@ -12,13 +12,12 @@ import MyListButton from "./mylist-button";
 
 const MoviePage = ({authorizationStatus, film, isDataLoaded, onLoadMovie}) => {
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
-
+  console.log(film)
   const {id} = useParams();
   const [activeLink, setActiveLink] = useState(`Overview`);
   useEffect(() => {
-    if (!isDataLoaded) {
-      onLoadMovie(id);}
-  }, [isDataLoaded]);
+    onLoadMovie(id);
+  }, []);
   const getPageElement = (activeLink) => {
     switch (activeLink) {
       case `Overview`:

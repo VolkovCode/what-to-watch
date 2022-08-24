@@ -10,7 +10,7 @@ const Login = ({userLogin}) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const fromPage = location.state ? location.state.from.pathname : `/`;
+  const fromPage = location.state ? -1 : `/`;
   console.log(fromPage)
   const [email, setLogin] = useState(``);
   const [password, setPassword] = useState(``);
