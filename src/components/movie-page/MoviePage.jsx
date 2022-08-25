@@ -58,7 +58,7 @@ const MoviePage = ({authorizationStatus, film, isDataLoaded, onLoadMovie}) => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <MyListButton />
+                <MyListButton id = {id}/>
                 <Link to={`/films/${id}/review`} className="btn movie-card__button">
                   Add review
                 </Link>

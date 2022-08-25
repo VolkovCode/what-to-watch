@@ -27,10 +27,11 @@ export const fetchPromoMovie = () => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(ActionCreator.loadPromoFilm(data)))
 );
 
-// export const makeFavourite = (id, status) => (dispatch, _getState, api) => (
-//   api.get(`/favorite/${id}/${status}`)
-//     .then(({data}) => dispatch)
-// );
+export const makeFavourite = (id, status) => (_dispatch, _getState, api) => (
+  api.post(`/favorite/${id}/${status}`).then(console.log(id, status))
+  // .then(({data}) => dispatch(ActionCreator.makeFavoriteFilm))
+);
+
 export const getReviws = (id) => (dispatch, _getState, api) => (
   api.get(`/comments/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadComments(data)))
@@ -43,5 +44,5 @@ export const addReview = (id, {rating, comment}) => (dispatch, _getState, api) =
 
 export const getFavouriteMovies = () => (dispatch, _getState, api) => (
   api.get(`/favorite`)
-    .then(({data}) => console.log(data))
+    .then(({data}) => dispatch(ActionCreator.loadFavouriteFilms(data)))
 );

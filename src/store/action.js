@@ -54,5 +54,9 @@ export const ActionCreator = {
   loadFavouriteFilms: (movies) => ({
     type: ActionType.LOAD_FAVOURITE_MOVIES,
     payload: movies,
+  }),
+  makeFavoriteFilm: (movie) => ({
+    type: ActionType.MAKE_FAVOURITE,
+    payload: movie,
   })
 };

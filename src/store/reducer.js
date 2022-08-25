@@ -1,4 +1,4 @@
-import {ADD_CARDS_COUNT, ALL_GENRES, AuthorizationStatus, INITIAL_CARDS, START_VISIBLE_CARDS_COUNT} from "../data/constants";
+import {ADD_CARDS_COUNT, ALL_GENRES, AuthorizationStatus, START_VISIBLE_CARDS_COUNT} from "../data/constants";
 import {ActionType} from "./action";
 
 const initialState = {
