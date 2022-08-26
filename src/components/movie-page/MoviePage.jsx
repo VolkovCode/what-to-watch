@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { AuthorizationStatus } from "../../data/constants";
 import { fetchMovie } from "../../store/api-actions";
 import MyListButton from "./mylist-button";
+import RecommendFilms from "./recomend-films/recomend-films";
 
 const MoviePage = ({authorizationStatus, film, isDataLoaded, onLoadMovie}) => {
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
@@ -17,7 +18,7 @@ const MoviePage = ({authorizationStatus, film, isDataLoaded, onLoadMovie}) => {
   const [activeLink, setActiveLink] = useState(`Overview`);
   useEffect(() => {
     onLoadMovie(id);
-  }, []);
+  }, [id]);
   const getPageElement = (activeLink) => {
     switch (activeLink) {
       case `Overview`:
@@ -32,7 +33,7 @@ const MoviePage = ({authorizationStatus, film, isDataLoaded, onLoadMovie}) => {
   };
   return (
     <div>
-      <section className="movie-card movie-card--full">
+      <section className="movie-card movie-card--full" style={{'background': film.background_color}}>
         <div className="movie-card__hero">
           <div className="movie-card__bg">
             <img
@@ -105,79 +106,7 @@ const MoviePage = ({authorizationStatus, film, isDataLoaded, onLoadMovie}) => {
         </div>
       </section>
 
-      <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
-
-          <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img
-                  src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">
-                  Fantastic Beasts: The Crimes of Grindelwald
-                </a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img
-                  src="img/bohemian-rhapsody.jpg"
-                  alt="Bohemian Rhapsody"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">
-                  Bohemian Rhapsody
-                </a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img
-                  src="img/macbeth.jpg"
-                  alt="Macbeth"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">
-                  Macbeth
-                </a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img
-                  src="img/aviator.jpg"
-                  alt="Aviator"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">
-                  Aviator
-                </a>
-              </h3>
-            </article>
-          </div>
-        </section>
-
-        <Footer />
-      </div>
+      <RecommendFilms />
     </div>
   );
 };

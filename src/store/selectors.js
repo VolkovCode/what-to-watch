@@ -1,5 +1,4 @@
-import {ALL_GENRES, MAX_GENRES_COUNT} from "../data/constants";
-
+import {ALL_GENRES, MAX_GENRES_COUNT, MAX_RECOMENDED_FILMS} from "../data/constants";
 
 export const getGenres = (state) => {
   const genres = new Set(state.movies.map(((movie) => movie.genre)));
@@ -17,4 +16,9 @@ export const getMovies = (state) => {
 export const getVisibleCardsCount = (state) => {
   const count = state.visibleCards;
   return count;
+};
+
+export const getRecommendedMovies = (state) => {
+  const recommendedMovies = state.movies.filter((movie) => movie.genre === state.activeFilm.genre).slice(0, MAX_RECOMENDED_FILMS);
+  return recommendedMovies;
 };

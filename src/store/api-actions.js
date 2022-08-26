@@ -20,6 +20,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 export const fetchMovie = (id) => (dispatch, _getState, api) => (
   api.get(`/films/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadFilmById(data)))
+    .then(() => dispatch(fetchMoviesList()))
 );
 
 export const fetchPromoMovie = () => (dispatch, _getState, api) => (
