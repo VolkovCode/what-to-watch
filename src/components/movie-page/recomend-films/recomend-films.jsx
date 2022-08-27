@@ -10,7 +10,7 @@ const RecommendFilms = ({relatedMovies}) => {
       <section className="catalog catalog--like-this">
         <h2 className="catalog__title">More like this</h2>
         <div className="catalog__movies-list">
-          {relatedMovies.map((movie) => <CardPoster key={movie.key} movie={movie}/>)}
+          {relatedMovies.map((movie) => <CardPoster key={movie.id} movie={movie}/>)}
         </div>
       </section>
       <Footer />

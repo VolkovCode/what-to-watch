@@ -1,17 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import Logo from '../logo/Logo';
 import {useParams, Link} from 'react-router-dom';
-import { addReview } from '../../store/api-actions';
-import { connect } from "react-redux";
+import {addReview} from '../../store/api-actions';
+import {connect} from "react-redux";
+import {REVIEW} from '../../data/constants';
+import { useMemo } from 'react';
 
 const AddReview = ({postReview}) => {
   const {id} = useParams();
+  const errRef = useRef();
+  const textFormRef = useRef();
 
   const [reviewForm, setReviewForm] = useState({
     rating: `8`,
     comment: ``,
   });
 
+  useEffect(() => {
+    textFormRef.current.focus();
+  }, []);
+
+  const [reviewLengthError, setReviewLengthError] = useState(false);
   const handleReviewRatingChange = (e) => {
     // const {name, value} = e.target;
     setReviewForm(
@@ -20,7 +29,7 @@ const AddReview = ({postReview}) => {
   };
 
   const handleReviewTextChange = (e) => {
-    // const {name, value} = e.target;
+    setReviewLengthError(false);
     setReviewForm(
         {...reviewForm, comment: e.target.value}
     );
@@ -28,10 +37,18 @@ const AddReview = ({postReview}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postReview(id, reviewForm);
+    const {comment} = reviewForm;
+    if (comment.length >= REVIEW.MIN_LENGTH && comment <= REVIEW.MAX_LENGTH) {
+      postReview(id, reviewForm);
+    } else {
+      setReviewLengthError(true);
+      errRef.current.focus();
+
+    }
 
   };
 
+  const memoizedLogo = useMemo(() => <Logo />, []);
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
@@ -42,7 +59,7 @@ const AddReview = ({postReview}) => {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header">
-          <Logo />
+          {memoizedLogo}
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
@@ -64,7 +81,8 @@ const AddReview = ({postReview}) => {
         <div className="movie-card__poster movie-card__poster--small">
           <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
         </div>
-      </div><div className="add-review">
+      </div>
+      <div className="add-review">
         <form onSubmit={handleSubmit} action="#" className="add-review__form">
           <div className="rating">
             <div onChange={handleReviewRatingChange} className="rating__stars">
@@ -99,9 +117,9 @@ const AddReview = ({postReview}) => {
               <label className="rating__label" htmlFor="star-10">Rating 10</label>
             </div>
           </div>
-
+          {reviewLengthError && <p ref={errRef} style={{'color': `red`}}>Отзыв должен быть длинной не меньше {REVIEW.MIN_LENGTH} и не больше {REVIEW.MAX_LENGTH} символов.</p>}
           <div className="add-review__text">
-            <textarea onChange={handleReviewTextChange} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <textarea ref={textFormRef} onChange={handleReviewTextChange} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit">Post</button>
             </div>
