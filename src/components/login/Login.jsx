@@ -1,24 +1,34 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {connect} from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import {login} from "../../store/api-actions";
+import { getIsAuthorizationErrorFlag } from "../../store/selectors";
 // import {Link} from "react-router-dom";
 import Footer from "../footer/Footer";
 import Logo from "../logo/Logo";
 
-const Login = ({userLogin}) => {
+const Login = ({userLogin, isAuthorizationErrorFlag}) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const email = useRef();
+  const password = useRef();
+  // const isFormValid = !isAuthorizationErrorFlag;
 
   const fromPage = location.state ? -1 : `/`;
-  console.log(fromPage)
-  const [email, setLogin] = useState(``);
-  const [password, setPassword] = useState(``);
+  // console.log(fromPage)
+  // const [email, setLogin] = useState(``);
+  // const [password, setPassword] = useState(``);
 
   const onClickHandlerLogin = (e) => {
+
     e.preventDefault();
-    userLogin({login: email, password});
-    navigate(fromPage);
+    userLogin(
+        {email: email.current.value, password: password.current.value}
+    );
+    console.log(isAuthorizationErrorFlag)
+    // if (isFormValid) {
+    //   navigate(fromPage);
+    // }
   };
 
   return (
@@ -34,13 +44,13 @@ const Login = ({userLogin}) => {
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
+                ref={email}
                 className="sign-in__input"
                 type="email"
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
-                value={email}
-                onChange={(e) => setLogin(e.target.value)}
+                required
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">
                 Email address
@@ -48,13 +58,13 @@ const Login = ({userLogin}) => {
             </div>
             <div className="sign-in__field">
               <input
+                ref={password}
                 className="sign-in__input"
                 type="password"
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                required
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">
                 Password
@@ -73,11 +83,15 @@ const Login = ({userLogin}) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  isAuthorizationErrorFlag: getIsAuthorizationErrorFlag(state)
+});
+
 const mapDispatchToProps = (dispatch) => ({
-  userLogin({login: email, password}) {
-    dispatch(login({login: email, password}));
+  userLogin({email, password}) {
+    dispatch(login({email, password}));
   }
 });
 
 export {Login};
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

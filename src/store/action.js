@@ -12,6 +12,9 @@ export const ActionType = {
   LOAD_COMMENTS: `data/loadComments`,
   POST_COMMENT: `data/postComment`,
   LOAD_FAVOURITE_MOVIES: `data/loadFavouriteMovies`,
+  LOAD_USER_INFORMARTION: `data/loadUserInformation`,
+  SET_AUTHORIZATION_ERROR_FLAG: `data/setAuthorizathionErrorFlag`,
+
 };
 
 export const ActionCreator = {
@@ -58,5 +61,13 @@ export const ActionCreator = {
   makeFavoriteFilm: (movie) => ({
     type: ActionType.MAKE_FAVOURITE,
     payload: movie,
+  }),
+  loadUserInformation: (user) => ({
+    type: ActionType.LOAD_USER_INFORMARTION,
+    payload: user,
+  }),
+  setAuthorizationErrorFlag: (flag) => ({
+    type: ActionType.SET_AUTHORIZATION_ERROR_FLAG,
+    payload: flag,
   })
 };

@@ -10,7 +10,6 @@ const Footer = () => {
           <span className="logo__letter logo__letter--3">W</span>
         </a>
       </div>
-
       <div className="copyright">
         <p>© 2022 What to watch Ltd.</p>
       </div>
@@ -18,4 +17,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);

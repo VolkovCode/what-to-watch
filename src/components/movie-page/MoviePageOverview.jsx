@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { convertScore } from "../../utils/utils";
 
 const MoviePageOverview = ({film}) => {
   return (
@@ -7,7 +8,7 @@ const MoviePageOverview = ({film}) => {
       <div className="movie-rating">
         <div className="movie-rating__score">{film.rating}</div>
         <p className="movie-rating__meta">
-          <span className="movie-rating__level">Very good</span>
+          <span className="movie-rating__level">{convertScore(film.rating)}</span>
           <span className="movie-rating__count">{film.scores_count} ratings</span>
         </p>
       </div>

@@ -1,12 +1,13 @@
 import React, {useState, useRef, useEffect} from 'react';
 import Logo from '../logo/Logo';
 import {useParams, Link} from 'react-router-dom';
-import {addReview} from '../../store/api-actions';
+import {addReview, fetchMovie} from '../../store/api-actions';
 import {connect} from "react-redux";
 import {REVIEW} from '../../data/constants';
-import { useMemo } from 'react';
+import {useMemo} from 'react';
+import { AvatarBlock } from '../header/user-block/avater-block';
 
-const AddReview = ({postReview}) => {
+const AddReview = ({postReview, movie, onLoadMovie}) => {
   const {id} = useParams();
   const errRef = useRef();
   const textFormRef = useRef();
@@ -18,11 +19,11 @@ const AddReview = ({postReview}) => {
 
   useEffect(() => {
     textFormRef.current.focus();
+    onLoadMovie(id);
   }, []);
 
   const [reviewLengthError, setReviewLengthError] = useState(false);
   const handleReviewRatingChange = (e) => {
-    // const {name, value} = e.target;
     setReviewForm(
         {...reviewForm, rating: e.target.value}
     );
@@ -50,20 +51,23 @@ const AddReview = ({postReview}) => {
 
   const memoizedLogo = useMemo(() => <Logo />, []);
   return (
-    <section className="movie-card movie-card--full">
+    <section className="movie-card movie-card--full" style={{'background': movie.background_color}}>
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img
+            src={movie.background_image}
+            alt={movie.name}
+          />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header">
-          {memoizedLogo}
+          <Logo />
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${id}`} className="breadcrumbs__link">The Grand Budapest Hotel</Link>
+                <Link to={`/films/${id}`} className="breadcrumbs__link">{movie.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -71,15 +75,11 @@ const AddReview = ({postReview}) => {
             </ul>
           </nav>
 
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
+          <AvatarBlock />
         </header>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={movie.poster_image} alt={movie.name} width="218" height="327" />
         </div>
       </div>
       <div className="add-review">
@@ -132,11 +132,18 @@ const AddReview = ({postReview}) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  movie: state.activeFilm,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   postReview(id, {rating, comment}) {
     dispatch(addReview(id, {rating, comment}));
+  },
+  onLoadMovie(id) {
+    dispatch(fetchMovie(id));
   }
 });
 
 export {AddReview};
-export default connect(null, mapDispatchToProps)(AddReview);
+export default connect(mapStateToProps, mapDispatchToProps)(AddReview);

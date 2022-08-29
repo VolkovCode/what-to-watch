@@ -11,6 +11,8 @@ const initialState = {
   promoFilm: {},
   isDataLoaded: false,
   comments: [],
+  userInfo: {},
+  isAuthorizationErrorFlag: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -67,6 +69,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         favouriteMovies: action.payload
+      };
+    case ActionType.LOAD_USER_INFORMARTION:
+      return {
+        ...state,
+        userInfo: action.payload
+      };
+    case ActionType.SET_AUTHORIZATION_ERROR_FLAG:
+      return {
+        ...state,
+        isAuthorizationError: action.payload
       };
   }
   return state;

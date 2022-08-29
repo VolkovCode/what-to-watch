@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { ActionCreator } from '../../store/action';
-import { getMovies, getVisibleCardsCount } from '../../store/selectors';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
+import {getMovies, getVisibleCardsCount} from '../../store/selectors';
 
-const ShowMore = ({ movies, visibleCardsCount, showMore }) => {
+const ShowMore = ({movies, visibleCardsCount, showMore}) => {
   const condition = movies.length > visibleCardsCount;
   return (
     condition
