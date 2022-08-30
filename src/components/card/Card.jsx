@@ -12,6 +12,12 @@ const Card = ({movies, visibleCardsCount, isDataLoaded, onLoadData}) => {
     }
   }, [isDataLoaded]);
 
+  if (!isDataLoaded) {
+    return (
+      <p>Loading...</p>
+    );
+  }
+
   return (
     <div >
       <div className="catalog__movies-list">
