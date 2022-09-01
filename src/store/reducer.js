@@ -12,7 +12,7 @@ const initialState = {
   isDataLoaded: false,
   comments: [],
   userInfo: {},
-  isAuthorizationErrorFlag: false,
+  isAuthorizationError: false,
 };
 
 const reducer = (state = initialState, action) => {

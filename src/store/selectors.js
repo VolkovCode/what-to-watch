@@ -23,6 +23,6 @@ export const getRecommendedMovies = (state) => {
   return recommendedMovies;
 };
 
-export const getIsAuthorizationErrorFlag = (state) => {
-  return state.isAuthorizationErrorFlag;
+export const getisAuthorizationError = (state) => {
+  return state.isAuthorizationError;
 };

@@ -1,35 +1,38 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import {connect} from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import {AuthorizationStatus} from "../../data/constants";
 import {login} from "../../store/api-actions";
-import { getIsAuthorizationErrorFlag } from "../../store/selectors";
-// import {Link} from "react-router-dom";
+import {getisAuthorizationError} from "../../store/selectors";
 import Footer from "../footer/Footer";
 import Logo from "../logo/Logo";
 
-const Login = ({userLogin, isAuthorizationErrorFlag}) => {
+const Login = ({userLogin, isAuthorizationError, authorizationStatus}) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const email = useRef();
-  const password = useRef();
-  // const isFormValid = !isAuthorizationErrorFlag;
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
+  const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
   const fromPage = location.state ? -1 : `/`;
-  // console.log(fromPage)
-  // const [email, setLogin] = useState(``);
-  // const [password, setPassword] = useState(``);
 
   const onClickHandlerLogin = (e) => {
-
     e.preventDefault();
     userLogin(
-        {email: email.current.value, password: password.current.value}
+        {email: emailRef.current.value, password: passwordRef.current.value}
     );
-    console.log(isAuthorizationErrorFlag)
-    // if (isFormValid) {
-    //   navigate(fromPage);
-    // }
   };
+
+  useEffect(() => {
+    if (isAuthorized) {
+      navigate(fromPage);
+    }
+  }, [isAuthorized]);
+
+  const message = (
+    <div className="sign-in__message">
+      <p>Please enter a valid email address</p>
+    </div>);
 
   return (
     <div className="user-page">
@@ -41,10 +44,11 @@ const Login = ({userLogin, isAuthorizationErrorFlag}) => {
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form">
+          {isAuthorizationError && message}
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
-                ref={email}
+                ref={emailRef}
                 className="sign-in__input"
                 type="email"
                 placeholder="Email address"
@@ -58,7 +62,7 @@ const Login = ({userLogin, isAuthorizationErrorFlag}) => {
             </div>
             <div className="sign-in__field">
               <input
-                ref={password}
+                ref={passwordRef}
                 className="sign-in__input"
                 type="password"
                 placeholder="Password"
@@ -84,7 +88,8 @@ const Login = ({userLogin, isAuthorizationErrorFlag}) => {
 };
 
 const mapStateToProps = (state) => ({
-  isAuthorizationErrorFlag: getIsAuthorizationErrorFlag(state)
+  isAuthorizationError: getisAuthorizationError(state),
+  authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

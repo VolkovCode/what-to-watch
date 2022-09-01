@@ -14,10 +14,10 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 
 export const login = ({email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
-    .then(({data}) => dispatch(ActionCreator.loadUserInformation(data)))
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => dispatch(ActionCreator.setAuthorizationErrorFlag(false)))
-    .catch(() => dispatch(ActionCreator.setAuthorizationErrorFlag(true)))
+  .then(({data}) => dispatch(ActionCreator.loadUserInformation(data)))
+  .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+  .then(() => dispatch(ActionCreator.setAuthorizationErrorFlag(false)))
+  .catch((error) => dispatch(ActionCreator.setAuthorizationErrorFlag(true)))
 );
 
 export const fetchMovie = (id) => (dispatch, _getState, api) => (

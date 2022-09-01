@@ -21,12 +21,12 @@ const CardPoster = ({movie}) => {
     <article onMouseOut={() => setPlayPreview(false)} onMouseEnter={handlePlayPreview} onMouseLeave={handleDisplayPoster} className="small-movie-card catalog__movies-card">
       {playPreview
         ? <VideoPlayer src={movie.preview_video_link} isPlayingProp={playPreview} />
-        : (<><div className="small-movie-card__image">
+        : (<Link className="small-movie-card__link" to={`/films/${movie.id}`}><div className="small-movie-card__image">
           <img src={movie.preview_image} alt={movie.name} width="280" height="175" />
         </div>
         <h3 className="small-movie-card__title">
-          <Link className="small-movie-card__link" to={`/films/${movie.id}`}>{movie.name}</Link>
-        </h3></>)}
+          {movie.name}
+        </h3></Link>)}
     </article>
   );
 };

@@ -10,13 +10,11 @@ const Main = () => {
   return (
     <div>
       <PromoCard />
-
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList />
           <Card/>
-
           <ShowMore />
         </section>
 

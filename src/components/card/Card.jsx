@@ -1,15 +1,18 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
+import { ActionCreator } from "../../store/action.js";
 import {fetchMoviesList} from "../../store/api-actions.js";
 import {getMovies, getVisibleCardsCount} from "../../store/selectors.js";
 import CardPoster from "./CardPoster.jsx";
 
-const Card = ({movies, visibleCardsCount, isDataLoaded, onLoadData}) => {
+const Card = ({movies, visibleCardsCount, isDataLoaded, onLoadData, resetFilters}) => {
   const shownMovies = movies.slice(0, visibleCardsCount);
   useEffect(() => {
     if (!isDataLoaded) {
       onLoadData();
     }
+    console.log(isDataLoaded)
+    return resetFilters();
   }, [isDataLoaded]);
 
   if (!isDataLoaded) {
@@ -39,6 +42,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onLoadData() {
     dispatch(fetchMoviesList());
+  },
+  resetFilters() {
+    dispatch(ActionCreator.resetFilters());
   }
 });
 
