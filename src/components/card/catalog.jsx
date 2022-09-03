@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import { ActionCreator } from "../../store/action.js";
 import {fetchMoviesList} from "../../store/api-actions.js";
 import {getMovies, getVisibleCardsCount} from "../../store/selectors.js";
-import CardPoster from "./CardPoster.jsx";
+import CardPoster from "./card-poster.jsx";
 
 const Card = ({movies, visibleCardsCount, isDataLoaded, onLoadData, resetFilters}) => {
   const shownMovies = movies.slice(0, visibleCardsCount);
@@ -11,7 +11,6 @@ const Card = ({movies, visibleCardsCount, isDataLoaded, onLoadData, resetFilters
     if (!isDataLoaded) {
       onLoadData();
     }
-    console.log(isDataLoaded)
     return resetFilters();
   }, [isDataLoaded]);
 

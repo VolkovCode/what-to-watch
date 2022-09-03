@@ -1,10 +1,10 @@
 import React, {useState, useRef, useEffect} from 'react';
-import Logo from '../logo/Logo';
+import Logo from '../logo/logo';
 import {useParams, Link} from 'react-router-dom';
 import {addReview, fetchMovie} from '../../store/api-actions';
 import {connect} from "react-redux";
 import {REVIEW} from '../../data/constants';
-import {useMemo} from 'react';
+
 import { AvatarBlock } from '../header/user-block/avater-block';
 
 const AddReview = ({postReview, movie, onLoadMovie}) => {
@@ -46,10 +46,8 @@ const AddReview = ({postReview, movie, onLoadMovie}) => {
       errRef.current.focus();
 
     }
-
   };
 
-  const memoizedLogo = useMemo(() => <Logo />, []);
   return (
     <section className="movie-card movie-card--full" style={{'background': movie.background_color}}>
       <div className="movie-card__header">

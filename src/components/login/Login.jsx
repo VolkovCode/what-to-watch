@@ -4,8 +4,8 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {AuthorizationStatus} from "../../data/constants";
 import {login} from "../../store/api-actions";
 import {getisAuthorizationError} from "../../store/selectors";
-import Footer from "../footer/Footer";
-import Logo from "../logo/Logo";
+import Footer from "../footer/footer";
+import Logo from "../logo/logo";
 
 const Login = ({userLogin, isAuthorizationError, authorizationStatus}) => {
   const navigate = useNavigate();

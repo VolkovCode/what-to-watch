@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import {connect} from "react-redux";
 import {Link, useParams} from "react-router-dom";
-import { getReviws } from "../../store/api-actions";
-import Review from "./reviews/review";
+import { getReviws } from "../../../store/api-actions";
+import Review from "../reviews/review";
 
 const MoviePageReviews = ({reviews, onLoadReviews}) => {
   console.log(reviews);

@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getRecommendedMovies} from '../../../store/selectors';
-import CardPoster from '../../card/CardPoster';
-import Footer from '../../footer/Footer';
+import CardPoster from '../../card/card-poster';
+import Footer from '../../footer/footer';
 
 const RecommendFilms = ({relatedMovies}) => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { convertScore } from "../../utils/utils";
+import { convertScore } from "../../../utils/utils";
 
 const MoviePageOverview = ({film}) => {
   return (

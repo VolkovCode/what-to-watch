@@ -1,11 +1,10 @@
-import React, {useEffect, useMemo, useState} from "react";
-import Footer from "../footer/Footer";
-import MoviePageDetails from "./MoviePageDetails";
-import MoviePageReviews from "./MoviePageReviews";
+import React, {useEffect, useState} from "react";
+import MoviePageDetails from "./movie-page-details/movie-page-details";
+import MoviePageReviews from "./movie-page-reviews/movie-page-reviews";
 import {Link, useParams} from "react-router-dom";
-import MoviePageOverview from "./MoviePageOverview";
+import MoviePageOverview from "./movie-page-overview/movie-page-overview";
 import Header from "../header/header";
-import { connect } from "react-redux";
+import { connect} from "react-redux";
 import { AuthorizationStatus } from "../../data/constants";
 import { fetchMovie } from "../../store/api-actions";
 import MyListButton from "./mylist-button";
@@ -88,14 +87,14 @@ const MoviePage = ({authorizationStatus, film, isDataLoaded, onLoadMovie}) => {
                     </Link>
                   </li>
                   <li className={`movie-nav__item ` + (activeLink === `Details` ? `movie-nav__item--active` : ``)}>
-                    <a onClick={() => setActiveLink(`Details`)} className="movie-nav__link">
+                    <Link to={``} href="#" onClick={() => setActiveLink(`Details`)} className="movie-nav__link">
                       Details
-                    </a>
+                    </Link>
                   </li>
                   <li className={`movie-nav__item ` + (activeLink === `Reviews` ? `movie-nav__item--active` : ``)}>
-                    <a onClick={() => setActiveLink(`Reviews`)} className="movie-nav__link">
+                    <Link to={``} onClick={() => setActiveLink(`Reviews`)} className="movie-nav__link">
                       Reviews
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>

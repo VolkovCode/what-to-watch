@@ -5,7 +5,7 @@ import {legacy_createStore as createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import {applyMiddleware} from 'redux';
-import App from './components/app/App';
+import App from './components/app/app';
 import {reducer} from './store/reducer';
 import {createAPI} from './api/api';
 import {ActionCreator} from './store/action';

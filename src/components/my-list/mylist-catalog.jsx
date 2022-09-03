@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import { getFavouriteMovies } from '../../store/api-actions';
-import CardPoster from '../card/CardPoster';
+import { selectFavouriteMovies } from '../../store/selectors';
+import CardPoster from '../card/card-poster';
 
 const MyListCatalog = ({myFilms, loadMyFilms}) => {
-  console.log(myFilms)
   useEffect(() => {
     loadMyFilms();
   }, []);
@@ -14,7 +14,7 @@ const MyListCatalog = ({myFilms, loadMyFilms}) => {
 };
 
 const mapStateToProps = (state) => ({
-  myFilms: state.favouriteMovies
+  myFilms: selectFavouriteMovies(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

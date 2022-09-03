@@ -1,11 +1,11 @@
 import React from "react";
-import Main from "../main-page/Main";
+import Main from "../main-page/main";
 import {Routes, Route, BrowserRouter} from "react-router-dom";
-import Login from "../login/Login";
-import MyList from "../mylist/MyList";
-import MoviePage from "../movie-page/MoviePage";
+import Login from "../login/login";
+import MyList from "../my-list/my-list";
+import MoviePage from "../movie-page/movie-page";
 import Player from "../video-player/Player";
-import AddReview from "../review/AddReview";
+import AddReview from "../review/add-review";
 import browserHistory from "../../browser-history";
 import PrivateComponent from "../private-component/private-component";
 
@@ -16,7 +16,6 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Main />} ></Route>
         <Route exact path='/login' element={<Login />} ></Route>
-        {/* <Route exact path='/my-list' element={<PrivateComponent redirectTo='/login' component={<MyList />}/>}></Route> */}
         <Route path='my-list' element={
           <PrivateComponent redirectTo='/login' >
             <MyList />

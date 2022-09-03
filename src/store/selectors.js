@@ -19,10 +19,15 @@ export const getVisibleCardsCount = (state) => {
 };
 
 export const getRecommendedMovies = (state) => {
-  const recommendedMovies = state.movies.filter((movie) => movie.genre === state.activeFilm.genre).slice(0, MAX_RECOMENDED_FILMS);
+  const recommendedMovies = state.movies.filter((movie) => movie.genre === state.activeFilm.genre).filter((movie) => movie.name !== state.activeFilm.name).slice(0, MAX_RECOMENDED_FILMS);
   return recommendedMovies;
 };
 
 export const getisAuthorizationError = (state) => {
   return state.isAuthorizationError;
+};
+
+
+export const selectFavouriteMovies = (state) => {
+  return state.favouriteMovies;
 };
