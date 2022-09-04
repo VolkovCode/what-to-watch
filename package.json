@@ -1,7 +1,7 @@
 {
   "name": "what-to-watch",
   "version": "1.0.0",
-  "type": "module",
+  "type": "commonjs",
   "private": true,
   "description": "Личный проект «{{projectTitle}}» от HTML Academy",
   "scripts": {
