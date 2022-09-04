@@ -9,7 +9,7 @@ import {reducer} from './store/reducer';
 import {createAPI} from './api/api';
 import {ActionCreator} from './store/action';
 import {AuthorizationStatus} from './data/constants';
-import App from './components/app/app';
+import App from "./components/app/app";
 
 
 const api = createAPI(
