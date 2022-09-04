@@ -1,26 +1,32 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { connect } from 'react-redux';
-import {useParams} from 'react-router-dom';
+import React, {useState} from 'react';
+import {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import {AuthorizationStatus} from '../../../data/constants';
 
-import {getFavouriteMovies, makeFavourite} from '../../store/api-actions';
-import {selectFavouriteMovies} from '../../store/selectors';
+import {getFavouriteMovies, makeFavourite} from '../../../store/api-actions';
+import {selectFavouriteMovies} from '../../../store/selectors';
 
-const MyListButton = ({id, addToFavouriteFilms, favouriteMovies, loadMyFilms}) => {
-  // const {id} = useParams();
+const MyListButton = ({authorizationStatus, id, addToFavouriteFilms, favouriteMovies, loadMyFilms}) => {
+  const [buttonClicked, setbuttonClicked] = useState(true)
+  const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadMyFilms();
-    console.log(isFavourite)
-  }, []);
+  }, [buttonClicked]);
 
   const onClickHandler = () => {
+    if (!isAuthorized) {
+      navigate(`/login`);
+      return;
+    }
     if (!isFavourite) {
       addToFavouriteFilms(id, 1);
-      console.log(1)
+      setbuttonClicked(!buttonClicked);
     } else {
       addToFavouriteFilms(id, 0);
-      console.log(2)
+      setbuttonClicked(!buttonClicked);
     }
   };
 
@@ -46,6 +52,11 @@ const MyListButton = ({id, addToFavouriteFilms, favouriteMovies, loadMyFilms}) =
   );
 };
 
+const mapStateToProps = (state) => ({
+  favouriteMovies: selectFavouriteMovies(state),
+  authorizationStatus: state.authorizationStatus
+});
+
 const mapDispatchToProps = (dispatch) => ({
   addToFavouriteFilms(filmId, status) {
     dispatch(makeFavourite(filmId, status));
@@ -55,8 +66,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-const mapStateToProps = (state) => ({
-  favouriteMovies: selectFavouriteMovies(state)
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyListButton);

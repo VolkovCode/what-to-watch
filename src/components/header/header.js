@@ -8,6 +8,7 @@ import SigninBlock from './user-block/signin-block';
 const Header = ({authorizationStatus}) => {
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
   const userBlock = isAuthorized ? <AvatarBlock /> : <SigninBlock />;
+
   return (
     <header className="page-header">
       <Logo />

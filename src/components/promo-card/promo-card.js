@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { fetchPromoMovie } from '../../store/api-actions';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {fetchPromoMovie} from '../../store/api-actions';
 import Header from '../header/header';
+import MylistButton from '../movie-page/my-list-buttons/mylist-button';
 
 const PromoCard = ({promoFilm, onLoadPromo}) => {
   useEffect(() => {
@@ -48,15 +49,7 @@ const PromoCard = ({promoFilm, onLoadPromo}) => {
                 </svg>
                 <span>Play</span>
               </button>
-              <button
-                className="btn btn--list movie-card__button"
-                type="button"
-              >
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
+              <MylistButton id = {promoFilm.id}/>
             </div>
           </div>
         </div>

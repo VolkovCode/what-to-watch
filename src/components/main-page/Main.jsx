@@ -2,7 +2,6 @@ import React from "react";
 import Card from "../card/catalog";
 import Footer from "../footer/footer";
 import GenresList from "../genre/genres-list";
-import Header from "../header/header";
 import PromoCard from "../promo-card/promo-card";
 import ShowMore from "./show-more";
 

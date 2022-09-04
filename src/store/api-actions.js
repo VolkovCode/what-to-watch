@@ -17,7 +17,7 @@ export const login = ({email, password}) => (dispatch, _getState, api) => (
   .then(({data}) => dispatch(ActionCreator.loadUserInformation(data)))
   .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
   .then(() => dispatch(ActionCreator.setAuthorizationErrorFlag(false)))
-  .catch((error) => dispatch(ActionCreator.setAuthorizationErrorFlag(true)))
+  .catch(() => dispatch(ActionCreator.setAuthorizationErrorFlag(true)))
 );
 
 export const fetchMovie = (id) => (dispatch, _getState, api) => (
@@ -32,8 +32,7 @@ export const fetchPromoMovie = () => (dispatch, _getState, api) => (
 );
 
 export const makeFavourite = (id, status) => (_dispatch, _getState, api) => (
-  api.post(`/favorite/${id}/${status}`).then(console.log(id, status))
-  // .then(({data}) => dispatch(ActionCreator.makeFavoriteFilm))
+  api.post(`/favorite/${id}/${status}`)
 );
 
 export const getReviws = (id) => (dispatch, _getState, api) => (

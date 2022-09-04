@@ -4,15 +4,14 @@ import MoviePageReviews from "./movie-page-reviews/movie-page-reviews";
 import {Link, useParams} from "react-router-dom";
 import MoviePageOverview from "./movie-page-overview/movie-page-overview";
 import Header from "../header/header";
-import { connect} from "react-redux";
-import { AuthorizationStatus } from "../../data/constants";
-import { fetchMovie } from "../../store/api-actions";
-import MyListButton from "./mylist-button";
+import {connect} from "react-redux";
+import {AuthorizationStatus} from "../../data/constants";
+import {fetchMovie} from "../../store/api-actions";
 import RecommendFilms from "./recomend-films/recomend-films";
+import MylistButton from "./my-list-buttons/mylist-button";
 
-const MoviePage = ({authorizationStatus, film, isDataLoaded, onLoadMovie}) => {
-  const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
-  console.log(film)
+const MoviePage = ({authorizationStatus, film, onLoadMovie}) => {
+  // const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
   const {id} = useParams();
   const [activeLink, setActiveLink] = useState(`Overview`);
   useEffect(() => {
@@ -58,7 +57,7 @@ const MoviePage = ({authorizationStatus, film, isDataLoaded, onLoadMovie}) => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <MyListButton id = {id}/>
+                <MylistButton id = {id}/>
                 <Link to={`/films/${id}/review`} className="btn movie-card__button">
                   Add review
                 </Link>

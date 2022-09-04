@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import { ActionCreator } from "../../store/action.js";
+import {ActionCreator} from "../../store/action.js";
 import {fetchMoviesList} from "../../store/api-actions.js";
 import {getMovies, getVisibleCardsCount} from "../../store/selectors.js";
 import CardPoster from "./card-poster.jsx";
