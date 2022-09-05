@@ -9,7 +9,7 @@ import {reducer} from './store/reducer';
 import {createAPI} from './api/api';
 import {ActionCreator} from './store/action';
 import {AuthorizationStatus} from './data/constants';
-import App from "./components/app/app.jsx";
+// import App from "./components/app/app.jsx";
 
 
 const api = createAPI(
@@ -28,5 +28,5 @@ const store = createStore(
 const root = ReactDOM.createRoot(document.getElementById(`root`));
 root.render(
     <Provider store={store}>
-      <App/>
+      {/* <App/> */}
     </Provider>);
