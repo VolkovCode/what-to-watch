@@ -5,11 +5,11 @@ import {addReview, fetchMovie} from '../../store/api-actions';
 import {connect} from "react-redux";
 import {REVIEW} from '../../data/constants';
 
-import { AvatarBlock } from '../header/user-block/avater-block';
+import {AvatarBlock} from '../header/user-block/avater-block';
 
 const AddReview = ({postReview, movie, onLoadMovie}) => {
   const {id} = useParams();
-  const errRef = useRef();
+  // const errRef = useRef();
   const textFormRef = useRef();
 
   const [reviewForm, setReviewForm] = useState({
@@ -43,8 +43,6 @@ const AddReview = ({postReview, movie, onLoadMovie}) => {
       postReview(id, reviewForm);
     } else {
       setReviewLengthError(true);
-      errRef.current.focus();
-
     }
   };
 
@@ -115,7 +113,7 @@ const AddReview = ({postReview, movie, onLoadMovie}) => {
               <label className="rating__label" htmlFor="star-10">Rating 10</label>
             </div>
           </div>
-          {reviewLengthError && <p ref={errRef} style={{'color': `red`}}>Отзыв должен быть длинной не меньше {REVIEW.MIN_LENGTH} и не больше {REVIEW.MAX_LENGTH} символов.</p>}
+          {reviewLengthError && <p style={{'color': `red`}}>Отзыв должен быть длинной не меньше {REVIEW.MIN_LENGTH} и не больше {REVIEW.MAX_LENGTH} символов.</p>}
           <div className="add-review__text">
             <textarea ref={textFormRef} onChange={handleReviewTextChange} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
             <div className="add-review__submit">
