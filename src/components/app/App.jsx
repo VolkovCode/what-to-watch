@@ -4,7 +4,7 @@ import {Routes, Route, BrowserRouter} from "react-router-dom";
 import Login from "../login/login";
 import MyList from "../my-list/my-list";
 import MoviePage from "../movie-page/movie-page";
-import Player from "../video-player/Player";
+import Player from "../video-player/player";
 import AddReview from "../review/add-review";
 import browserHistory from "../../browser-history";
 import PrivateComponent from "../private-component/private-component";

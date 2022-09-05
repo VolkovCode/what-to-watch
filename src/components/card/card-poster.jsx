@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import VideoPlayer from '../video-player/Player.jsx';
+import VideoPlayer from '../video-player/player.jsx';
 
 const CardPoster = ({movie}) => {
   const [playPreview, setPlayPreview] = useState(false);
