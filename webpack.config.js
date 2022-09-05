@@ -27,4 +27,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.json'],
   },
   devtool: 'source-map',
+  performance: {
+    hints: false
+  },
 };
