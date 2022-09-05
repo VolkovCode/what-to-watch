@@ -24,7 +24,10 @@ module.exports = {
     ],
   },
   resolve: {
+    modules: [path.resolve(process.cwd(), 'src'), 'node_modules'],
     extensions: ['*', '.js', '.jsx', '.json'],
+    symlinks: false,
+    cacheWithContext: false
   },
   devtool: 'source-map',
   performance: {
