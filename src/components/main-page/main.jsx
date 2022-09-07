@@ -8,13 +8,13 @@ import ShowMore from "./show-more";
 const Main = () => {
   return (
     <div>
-      <PromoCard />
+      {/* <PromoCard /> */}
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList />
+          {/* <GenresList /> */}
           <Card/>
-          <ShowMore />
+          {/* <ShowMore /> */}
         </section>
 
         <Footer />
