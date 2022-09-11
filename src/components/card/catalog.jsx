@@ -16,7 +16,7 @@ const Card = () => {
   useEffect(() => {
     if (movieStatus === `idle`) {
       dispatch(fetchMovies());
-      // dispatch(resetState());
+      dispatch(resetState());
     }
   }, [movieStatus, dispatch]);
 
