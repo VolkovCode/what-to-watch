@@ -6,10 +6,9 @@ import MoviePageOverview from "./movie-page-overview/movie-page-overview";
 import Header from "../header/header";
 import {useDispatch, useSelector} from "react-redux";
 import {AuthorizationStatus} from "../../data/constants";
-import {fetchMovie} from "../../store/api-actions";
 import RecommendFilms from "./recomend-films/recomend-films";
 import MylistButton from "./my-list-buttons/mylist-button";
-import {fetchOneMovie, getActiveMovie, resetState} from "../../store/movies/moviesSlice";
+import {fetchMovies, fetchOneMovie, getActiveMovie} from "../../store/movies/moviesSlice";
 
 const MoviePage = () => {
   // const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
@@ -19,8 +18,11 @@ const MoviePage = () => {
   const movie = useSelector((state) => getActiveMovie(state));
 
   useEffect(() => {
+    dispatch(fetchMovies());
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchOneMovie(id));
-    dispatch(resetState());
   }, [id, dispatch]);
 
   const getPageElement = (actvLink) => {
@@ -110,21 +112,10 @@ const MoviePage = () => {
         </div>
       </section>
 
-      {/* <RecommendFilms /> */}
+      {<RecommendFilms />}
     </div>
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   authorizationStatus: state.authorizationStatus,
-//   film: state.activeFilm,
-//   isDataLoaded: state.isDataLoaded,
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   onLoadMovie(id) {
-//     dispatch(fetchMovie(id));
-//   }
-// });
 
 export default MoviePage;

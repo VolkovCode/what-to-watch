@@ -1,19 +1,24 @@
 import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
-import {fetchPromoMovie} from '../../store/api-actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchPromoMovie, getPromoMovie} from '../../store/movies/moviesSlice';
 import Header from '../header/header';
 import MylistButton from '../movie-page/my-list-buttons/mylist-button';
 
-const PromoCard = ({promoFilm, onLoadPromo}) => {
+const PromoCard = ({}) => {
+  const dispatch = useDispatch();
+  const promoMovie = useSelector(getPromoMovie);
+  console.log(1)
   useEffect(() => {
-    onLoadPromo();
+    dispatch(fetchPromoMovie());
   }, []);
+
+
   return (
     <section className="movie-card">
       <div className="movie-card__bg">
         <img
-          src={promoFilm.background_image}
-          alt={promoFilm.name}
+          src={promoMovie.background_image}
+          alt={promoMovie.name}
         />
       </div>
 
@@ -25,18 +30,18 @@ const PromoCard = ({promoFilm, onLoadPromo}) => {
         <div className="movie-card__info">
           <div className="movie-card__poster">
             <img
-              src={promoFilm.poster_image}
-              alt={promoFilm.name}
+              src={promoMovie.poster_image}
+              alt={promoMovie.name}
               width="218"
               height="327"
             />
           </div>
 
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">{promoFilm.name}</h2>
+            <h2 className="movie-card__title">{promoMovie.name}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{promoFilm.genre}</span>
-              <span className="movie-card__year">{promoFilm.released}</span>
+              <span className="movie-card__genre">{promoMovie.genre}</span>
+              <span className="movie-card__year">{promoMovie.released}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -49,7 +54,7 @@ const PromoCard = ({promoFilm, onLoadPromo}) => {
                 </svg>
                 <span>Play</span>
               </button>
-              <MylistButton id = {promoFilm.id}/>
+              {/* <MylistButton id = {promoMovie.id}/> */}
             </div>
           </div>
         </div>
@@ -58,15 +63,4 @@ const PromoCard = ({promoFilm, onLoadPromo}) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  promoFilm: state.promoFilm
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadPromo() {
-    dispatch(fetchPromoMovie());
-  }
-});
-
-export {PromoCard};
-export default connect(mapStateToProps, mapDispatchToProps)(PromoCard);
+export default React.memo(PromoCard);

@@ -1,10 +1,12 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {getRecommendedMovies} from '../../../store/selectors';
+import {useSelector} from 'react-redux';
+import {getRecommendedMovies} from '../../../store/movies/moviesSlice';
 import CardPoster from '../../card/card-poster';
 import Footer from '../../footer/footer';
 
-const RecommendFilms = ({relatedMovies}) => {
+const RecommendFilms = () => {
+  const relatedMovies = useSelector(getRecommendedMovies);
+
   return (
     <div className="page-content">
       <section className="catalog catalog--like-this">
@@ -18,9 +20,4 @@ const RecommendFilms = ({relatedMovies}) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  relatedMovies: getRecommendedMovies(state)
-});
-
-export {RecommendFilms};
-export default connect(mapStateToProps)(RecommendFilms);
+export default RecommendFilms;
