@@ -4,19 +4,24 @@ import MoviePageReviews from "./movie-page-reviews/movie-page-reviews";
 import {Link, useParams} from "react-router-dom";
 import MoviePageOverview from "./movie-page-overview/movie-page-overview";
 import Header from "../header/header";
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {AuthorizationStatus} from "../../data/constants";
 import {fetchMovie} from "../../store/api-actions";
 import RecommendFilms from "./recomend-films/recomend-films";
 import MylistButton from "./my-list-buttons/mylist-button";
+import {fetchOneMovie, getActiveMovie} from "../../store/movies/moviesSlice";
 
-const MoviePage = ({authorizationStatus, film, onLoadMovie}) => {
+const MoviePage = () => {
   // const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
   const {id} = useParams();
   const [activeLink, setActiveLink] = useState(`Overview`);
+  const dispatch = useDispatch();
+  const movie = useSelector((state) => getActiveMovie(state));
+
   useEffect(() => {
-    onLoadMovie(id);
-  }, [id]);
+    dispatch(fetchOneMovie(id));
+  }, [id, dispatch]);
+
   const getPageElement = (activeLink) => {
     switch (activeLink) {
       case `Overview`:
@@ -31,12 +36,12 @@ const MoviePage = ({authorizationStatus, film, onLoadMovie}) => {
   };
   return (
     <div>
-      <section className="movie-card movie-card--full" style={{'background': film.background_color}}>
+      <section className="movie-card movie-card--full" style={{'background': movie.background_color}}>
         <div className="movie-card__hero">
           <div className="movie-card__bg">
             <img
-              src={film.background_image}
-              alt={film.name}
+              src={movie.background_image}
+              alt={movie.name}
             />
           </div>
 
@@ -44,10 +49,10 @@ const MoviePage = ({authorizationStatus, film, onLoadMovie}) => {
           <Header />
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{film.name}</h2>
+              <h2 className="movie-card__title">{movie.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{film.genre}</span>
-                <span className="movie-card__year">{film.released}</span>
+                <span className="movie-card__genre">{movie.genre}</span>
+                <span className="movie-card__year">{movie.released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -57,10 +62,10 @@ const MoviePage = ({authorizationStatus, film, onLoadMovie}) => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <MylistButton id = {id}/>
-                <Link to={`/films/${id}/review`} className="btn movie-card__button">
+                {/* <MylistButton id = {id}/> */}
+                {/* <Link to={`/films/${id}/review`} className="btn movie-card__button">
                   Add review
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
@@ -70,8 +75,8 @@ const MoviePage = ({authorizationStatus, film, onLoadMovie}) => {
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
               <img
-                src={film.poster_image}
-                alt={film.name}
+                src={movie.poster_image}
+                alt={movie.name}
                 width="218"
                 height="327"
               />
@@ -104,22 +109,21 @@ const MoviePage = ({authorizationStatus, film, onLoadMovie}) => {
         </div>
       </section>
 
-      <RecommendFilms />
+      {/* <RecommendFilms /> */}
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  film: state.activeFilm,
-  isDataLoaded: state.isDataLoaded,
-});
+// const mapStateToProps = (state) => ({
+//   authorizationStatus: state.authorizationStatus,
+//   film: state.activeFilm,
+//   isDataLoaded: state.isDataLoaded,
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  onLoadMovie(id) {
-    dispatch(fetchMovie(id));
-  }
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   onLoadMovie(id) {
+//     dispatch(fetchMovie(id));
+//   }
+// });
 
-export {MoviePage};
-export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
+export default MoviePage;

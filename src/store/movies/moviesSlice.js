@@ -8,7 +8,7 @@ const initialState = {
   movies: [],
   favouriteMovies: [],
   activeGenre: ALL_GENRES,
-  activeFilm: {},
+  activeMovie: {},
   promoFilm: {},
   status: `idle`,
   error: null
@@ -21,6 +21,12 @@ const initialState = {
 
 export const fetchMovies = createAsyncThunk(`movies/fetchMovies`, async () => {
   const response = await axios.get(MOVIES_URL);
+  return response.data;
+});
+
+export const fetchOneMovie = createAsyncThunk(`movies/fetchOneMovie`, async (id) => {
+  const response = await axios.get(`${MOVIES_URL}/${id}`);
+  await console.log(`${MOVIES_URL}/${id}`);
   return response.data;
 });
 
@@ -39,6 +45,10 @@ export const moviesSlice = createSlice({
       .addCase(fetchMovies.rejected, (state, action) => {
         state.status = `failed`;
         state.error = action.error.message;
+      })
+      .addCase(fetchOneMovie.fulfilled, (state, action) => {
+        state.status = `succeeded`;
+        state.activeMovie = action.payload;
       });
   }
 }
@@ -47,6 +57,7 @@ export const moviesSlice = createSlice({
 export const selectAllMovies = (state) => state.movies.movies;
 export const getMoviesStatus = (state) => state.movies.status;
 export const getMoviesError = (state) => state.movies.error;
+export const getActiveMovie = (state) => state.movies.activeMovie;
 
 
 export default moviesSlice.reducer;

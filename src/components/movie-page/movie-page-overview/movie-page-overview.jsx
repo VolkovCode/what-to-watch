@@ -1,38 +1,41 @@
 import React from "react";
-import { connect } from "react-redux";
-import { convertScore } from "../../../utils/utils";
+import { useSelector } from "react-redux";
+import { getActiveMovie } from "../../../store/movies/moviesSlice";
+import {convertScore} from "../../../utils/utils";
 
-const MoviePageOverview = ({film}) => {
+const MoviePageOverview = () => {
+  const movie = useSelector((state) => getActiveMovie(state));
+  if (!(`starring` in movie)) {
+    return (<div className="movie-rating">
+      Loading...
+    </div>);
+  }
   return (
-    <div>
+    <>
       <div className="movie-rating">
-        <div className="movie-rating__score">{film.rating}</div>
+        <div className="movie-rating__score">{movie.rating}</div>
         <p className="movie-rating__meta">
-          <span className="movie-rating__level">{convertScore(film.rating)}</span>
-          <span className="movie-rating__count">{film.scores_count} ratings</span>
+          <span className="movie-rating__level">{convertScore(movie.rating)}</span>
+          <span className="movie-rating__count">{movie.scores_count} ratings</span>
         </p>
       </div>
 
       <div className="movie-card__text">
         <p>
-          {film.description}
+          {movie.description}
         </p>
         <p className="movie-card__director">
-          <strong>Director: {film.director}</strong>
+          <strong>Director: {movie.director}</strong>
         </p>
 
         <p className="movie-card__starring">
           <strong>
-            Starring: {film.starring}
+            Starring: {movie.starring.join(`, `)}
           </strong>
         </p>
-      </div></div>
+      </div>
+    </>
   );
 };
 
-const mapStateToProps = (state) => ({
-  film: state.activeFilm,
-});
-
-export {MoviePageOverview};
-export default connect(mapStateToProps)(MoviePageOverview);
+export default MoviePageOverview;
