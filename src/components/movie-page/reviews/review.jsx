@@ -2,8 +2,10 @@ import React from 'react';
 import * as moment from 'moment';
 
 const Review = ({review}) => {
+
   const date = moment(review.date).format(`MMMM D, YYYY`);
   const dateToISO = moment(review.date).format(`YYYY-MM-DD`);
+
   return (
     <div className="review">
       <blockquote className="review__quote">

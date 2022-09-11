@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
 import {ALL_GENRES} from '../../data/constants';
 
-const MOVIES_URL = `https://6.react.pages.academy/wtw/films`;
+const BASE_URL = `https://6.react.pages.academy/wtw`;
 
 const initialState = {
   movies: [],
@@ -14,25 +14,25 @@ const initialState = {
   error: null
 };
 
-// export const fetchMoviesList = () => (dispatch, _getState, api) => (
-//   api.get(`/films`)
-//     .then(({data}) => dispatch(ActionCreator.loadMovies(data)))
-// );
-
 export const fetchMovies = createAsyncThunk(`movies/fetchMovies`, async () => {
-  const response = await axios.get(MOVIES_URL);
+  const response = await axios.get(`${BASE_URL}/films`);
   return response.data;
 });
 
 export const fetchOneMovie = createAsyncThunk(`movies/fetchOneMovie`, async (id) => {
-  const response = await axios.get(`${MOVIES_URL}/${id}`);
-  await console.log(`${MOVIES_URL}/${id}`);
+  const response = await axios.get(`${BASE_URL}/films/${id}`);
   return response.data;
 });
 
 export const moviesSlice = createSlice({
   name: `movies`,
   initialState,
+  reducers: {
+    resetState(state) {
+      state.status = `idle`;
+      state.error = null;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchMovies.pending, (state, _action) => {
@@ -59,5 +59,5 @@ export const getMoviesStatus = (state) => state.movies.status;
 export const getMoviesError = (state) => state.movies.error;
 export const getActiveMovie = (state) => state.movies.activeMovie;
 
-
+export const {resetState} = moviesSlice.actions;
 export default moviesSlice.reducer;

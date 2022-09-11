@@ -4,12 +4,12 @@ import MoviePageReviews from "./movie-page-reviews/movie-page-reviews";
 import {Link, useParams} from "react-router-dom";
 import MoviePageOverview from "./movie-page-overview/movie-page-overview";
 import Header from "../header/header";
-import {connect, useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AuthorizationStatus} from "../../data/constants";
 import {fetchMovie} from "../../store/api-actions";
 import RecommendFilms from "./recomend-films/recomend-films";
 import MylistButton from "./my-list-buttons/mylist-button";
-import {fetchOneMovie, getActiveMovie} from "../../store/movies/moviesSlice";
+import {fetchOneMovie, getActiveMovie, resetState} from "../../store/movies/moviesSlice";
 
 const MoviePage = () => {
   // const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
@@ -20,10 +20,11 @@ const MoviePage = () => {
 
   useEffect(() => {
     dispatch(fetchOneMovie(id));
+    dispatch(resetState());
   }, [id, dispatch]);
 
-  const getPageElement = (activeLink) => {
-    switch (activeLink) {
+  const getPageElement = (actvLink) => {
+    switch (actvLink) {
       case `Overview`:
         return <MoviePageOverview />;
       case `Details`:

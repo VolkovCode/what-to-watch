@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
-import {connect} from "react-redux";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import {getReviws} from "../../../store/api-actions";
+import {fetchReviws, selectAllReviews} from "../../../store/reviews/reviewsSlice";
 import Review from "../reviews/review";
 
-const MoviePageReviews = ({reviews, onLoadReviews}) => {
+const MoviePageReviews = () => {
   const {id} = useParams();
+  const reviews = useSelector((state) => selectAllReviews(state));
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    onLoadReviews(id);
+    dispatch(fetchReviws(id));
   }, []);
 
   const reviewsHalfLength = Math.round(reviews.length / 2);
@@ -27,15 +29,4 @@ const MoviePageReviews = ({reviews, onLoadReviews}) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  reviews: state.comments
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadReviews(id) {
-    dispatch(getReviws(id));
-  }
-});
-
-export {MoviePageReviews};
-export default connect(mapStateToProps, mapDispatchToProps)(MoviePageReviews);
+export default MoviePageReviews;
